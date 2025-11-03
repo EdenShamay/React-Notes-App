@@ -1,4 +1,4 @@
-#Link to the react.js App : 
+# Link to the react.js App
 https://edenshamay.github.io/React-Notes-App/
 
 
