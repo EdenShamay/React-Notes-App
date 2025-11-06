@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(true);
 
   const [note, setNote] = useState({
     title: "",
     content: "",
   });
+  
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -22,13 +27,38 @@ function CreateArea(props) {
     });
   }
 
+ useEffect(() => {
+    if (props.noteToEdit) {
+      setNote({
+        title: props.noteToEdit.title,
+        content: props.noteToEdit.content
+      });
+    }
+  }, [props.noteToEdit]);
+
   function submitNote(event) {
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: "",
-    });
-    event.preventDefault();
+    if (note.title.trim() != "" || note.content.trim() != "") {
+      props.onAdd(note);
+      setNote({
+        title: "",
+        content: "",
+      });
+      setIsSubmitted(true);
+      event.preventDefault();
+    } else {
+      setIsSubmitted(false);
+    }
+  }
+
+  
+
+  function error() {
+    return (
+      <Alert severity="error" className="error-alert">
+        <AlertTitle>Error</AlertTitle>
+        Fill at least one of the fields.
+      </Alert>
+    );
   }
 
   function expand() {
@@ -60,6 +90,7 @@ function CreateArea(props) {
             <AddIcon />
           </Fab>
         </Zoom>
+        {isSubmitted == true ? null : error()}
       </form>
     </div>
   );

@@ -122,7 +122,7 @@ h2 {
 .note button {
   position: relative;
   float: right;
-  margin: 10px;
+  margin: 5px;
   color: rgb(77, 142, 221);
   border: none;
   width: fit-content;
@@ -131,6 +131,7 @@ h2 {
   outline: none;
   background-color: transparent;
 }
+
 
 
 form.create-note {
@@ -158,7 +159,7 @@ form.create-note button {
   right: 18px;
   bottom: -18px;
   background: rgb(77, 142, 221);
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -168,7 +169,10 @@ form.create-note button {
   outline: none;
 }
 
-/* ===== RESPONSIVE ===== */
+form.create-note button:hover {
+  background-color: rgb(45, 136, 246) !important;
+}
+
 @media (max-width: 600px) {
   form.create-note {
     width: 90%;
@@ -176,4 +180,6 @@ form.create-note button {
     padding: 10px;
   }
 }
+
+
 
